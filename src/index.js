@@ -61,7 +61,24 @@ app.get("/todos", checksExistsUserAccount, (request, response) => {
 });
 
 app.post("/todos", checksExistsUserAccount, (request, response) => {
-  // Complete aqui
+  const { user } = request;
+  const { title, deadline} = request.body;
+
+  if(!title || !deadline){
+    return response.status(400).json({
+      error: "Title or deadline is null!"
+    });
+  }
+
+  user.todos.push({
+    id: uuidv4(),
+    title,
+    done: false,
+    deadline: new Date(deadline),
+    created_at: new Date()
+  })
+
+  return response.status(201).send(`Task ${title} create is success`);
 });
 
 app.put("/todos/:id", checksExistsUserAccount, (request, response) => {
