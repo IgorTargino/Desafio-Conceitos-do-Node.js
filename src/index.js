@@ -9,13 +9,6 @@ app.use(cors());
 app.use(express.json());
 
 const users = [];
-/* {
-	id: 'uuid', // precisa ser um uuid
-	name: 'Danilo Vieira',
-	username: 'danilo',
-	todos: []
-}
-*/
 
 function checksExistsUserAccount(request, response, next) {
   const { username } = request.headers;
